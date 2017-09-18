@@ -34,7 +34,7 @@ class MySQLDatabase {
 
     private function confirm_query($result) {
         if(!$result) {
-            die("Database query failed.");
+            die("Database query failed." . mysqli_error($this->connection) . " " . mysqli_errno($this->connection));
         }
     }
 
