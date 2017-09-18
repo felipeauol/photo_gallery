@@ -1,5 +1,6 @@
 <?php
 
-echo "Starting my new Project!";
+require_once ("../includes/database.php");
+
 
 ?>
