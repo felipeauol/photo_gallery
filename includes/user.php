@@ -9,13 +9,17 @@ class User {
     public $first_name;
     public $last_name;
 
+    function __toString()
+    {
+        return $this->username . " " . $this->last_name;
+    }
+
     public static function find_user_by_id($id) {
     global $database;
 
-    $result_set = self::find_by_sql("SELECT * FROM users WHERE id = {$id} LIMIT 1");
-    $found = $database->fetch_array($result_set);
+    $result_array = self::find_by_sql("SELECT * FROM users WHERE id = {$id} LIMIT 1");
 
-    return $found;
+    return !empty($result_array) ? array_shift($result_array) : false;
 }
 
     public static function find_all() {
@@ -28,8 +32,12 @@ class User {
     public static function find_by_sql($sql="") {
         global $database;
         $result_set = $database->db_query($sql);
+        $object_array = array();
+        while ($row = $database->fetch_array($result_set)){
+            $object_array[] = self::instantiate($row);
+        }
 
-        return $result_set;
+        return $object_array;
     }
 
     public static function create_user($username, $password, $f_name, $l_name){
@@ -49,7 +57,6 @@ class User {
         $object = new self;
 
         //Long boring way
-//
 //        $object->id         = $user_record['id'];
 //        $object->username   = $user_record['username'];
 //        $object->password   = $user_record['password'];
@@ -59,7 +66,7 @@ class User {
 
         //Easier, smart way
 
-        foreach($record as $attribute=>$value){
+        foreach($user_record as $attribute=>$value){
             if($object->has_attribute($attribute)){
                 $object->$attribute = $value;
             }
