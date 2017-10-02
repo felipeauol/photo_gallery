@@ -1,5 +1,5 @@
 <?php
-require_once ("../includes/database.php");
+require_once ("database.php");
 
 class User {
 
@@ -38,6 +38,20 @@ class User {
         }
 
         return $object_array;
+    }
+
+    public static function authenticate($username="",$password="") {
+        global $database;
+        $username = $database->mysql_prep("$username");
+        $password = $database->mysql_prep("$password");
+
+        $sql = "SELECT * FROM users 
+                WHERE username = '{$username}' 
+                AND password = '{$password}' 
+                LIMIT 1";
+
+        $result_array = self::find_by_sql($sql);
+        return !empty($result_array) ? array_shift($result_array) : false;
     }
 
     public static function create_user($username, $password, $f_name, $l_name){
