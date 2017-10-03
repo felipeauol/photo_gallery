@@ -1,9 +1,5 @@
 <?php
-$_SESSION['user_id'] = "";
-require_once("../../includes/functions.php");
-require_once("../../includes/session.php");
-require_once("../../includes/database.php");
-require_once("../../includes/user.php");
+require_once("../../includes/initialize.php");
 
 if($session->is_logged_in()) {
     redirect_to("index.php");
@@ -40,7 +36,7 @@ if (isset($_POST['username'])){ //Form has been submitted
 </head>
 <body>
 <div id="header">
-    <h1>Photo Gallery</h1>
+    <h1>Photo Gallery - Log in</h1>
 </div>
 <div id="main">
     <pre>

@@ -1,5 +1,6 @@
 <?php
 
+require_once("initialize.php");
 class Session {
 
     private $logged_in=false;
@@ -7,7 +8,7 @@ class Session {
 
     function __construct() {
         session_start();
-        $this->check_login();
+//        $this->check_login();
 
     }
 
