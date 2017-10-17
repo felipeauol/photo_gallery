@@ -29,15 +29,7 @@ if (isset($_POST['username'])){ //Form has been submitted
 
 
 ?>
-<html>
-<head>
-    <title>Photo Gallery</title>
-    <link href="../styles/main.css" media="all" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<div id="header">
-    <h1>Photo Gallery - Log in</h1>
-</div>
+<?php include_layout_template('header.php')?>
 <div id="main">
     <pre>
         <?php var_dump($_POST)?>
@@ -69,8 +61,5 @@ if (isset($_POST['username'])){ //Form has been submitted
             </tr>
         </table>
     </form>
-</div>
-<div id="footer">Copyright <?php echo date("Y", time()); ?>, Kevin Skoglund</div>
-</body>
-</html>
-<?php if(isset($database)) { $database->close_connection(); } ?>
+
+    <?php include_layout_template('footer.php')?>

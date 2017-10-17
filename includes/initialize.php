@@ -1,10 +1,13 @@
 <?php
 
+//Define core paths
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
+//Define Site Root
 defined('SITE_ROOT') ? null :
     define('SITE_ROOT', DS.'Users'.DS.'felipedeoliveira'.DS.'Sites'.DS.'photo_gallery');
 
+//Define path to the library
 defined('LIB_PATH') ? null :
     define('LIB_PATH', SITE_ROOT.DS.'includes');
 
