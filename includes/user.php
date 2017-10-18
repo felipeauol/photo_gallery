@@ -1,44 +1,14 @@
 <?php
 require_once (LIB_PATH.DS."database.php");
 
-class User {
+class User extends DatabaseObject {
 
+    protected static $table_name="users";
     public $id;
     public $username;
     public $password;
     public $first_name;
     public $last_name;
-
-    function __toString()
-    {
-        return $this->username . " " . $this->last_name;
-    }
-
-    public static function find_user_by_id($id) {
-    global $database;
-
-    $result_array = self::find_by_sql("SELECT * FROM users WHERE id = {$id} LIMIT 1");
-
-    return !empty($result_array) ? array_shift($result_array) : false;
-}
-
-    public static function find_all() {
-
-        $result_set = self::find_by_sql("SELECT * FROM users");
-
-        return $result_set;
-    }
-
-    public static function find_by_sql($sql="") {
-        global $database;
-        $result_set = $database->db_query($sql);
-        $object_array = array();
-        while ($row = $database->fetch_array($result_set)){
-            $object_array[] = self::instantiate($row);
-        }
-
-        return $object_array;
-    }
 
     public static function authenticate($username="",$password="") {
         global $database;
@@ -54,6 +24,14 @@ class User {
         return !empty($result_array) ? array_shift($result_array) : false;
     }
 
+    public function full_name() {
+        if((isset($this->first_name)) && isset($this->first_name)) {
+            return $this->first_name . " " . $this->last_name;
+        } else {
+            return "";
+        }
+    }
+
     public static function create_user($username, $password, $f_name, $l_name){
         global $database;
 
@@ -66,31 +44,8 @@ class User {
 
     }
 
-    private static function instantiate($user_record){
-
-        $object = new self;
-
-        //Long boring way
-//        $object->id         = $user_record['id'];
-//        $object->username   = $user_record['username'];
-//        $object->password   = $user_record['password'];
-//        $object->first_name = $user_record['first_name'];
-//        $object->last_name  = $user_record['last_name'];
-
-
-        //Easier, smart way
-
-        foreach($user_record as $attribute=>$value){
-            if($object->has_attribute($attribute)){
-                $object->$attribute = $value;
-            }
-        }
-        return $object;
-    }
-
-    private function has_attribute($attribute){
-       $object_vars = get_object_vars($this);
-
-       return array_key_exists($attribute, $object_vars);
+    function __toString()
+    {
+        return $this->username . " " . $this->last_name;
     }
 }

@@ -29,7 +29,7 @@ if (isset($_POST['username'])){ //Form has been submitted
 
 
 ?>
-<?php include_layout_template('header.php')?>
+<?php include_layout_template('admin_header.php')?>
 <div id="main">
     <pre>
         <?php var_dump($_POST)?>
@@ -62,4 +62,4 @@ if (isset($_POST['username'])){ //Form has been submitted
         </table>
     </form>
 
-    <?php include_layout_template('footer.php')?>
+    <?php include_layout_template('admin_footer.php')?>
