@@ -5,7 +5,10 @@ require_once('../../includes/initialize.php');
 
 <?php include_layout_template('admin_header.php')?>
 <h2>Menu</h2>
-
+<ul>
+    <li><a href="logfile.php"> Get Logs </a></li>
+    <li><a href="logout.php">Logout</a></li>
+</ul>
 <?php
 $user = User::find_user_by_id(1);
 echo $user->full_name();
@@ -19,5 +22,7 @@ foreach($users as $user) {
 }
 
 ?>
+
+<a href="index.php">Get Logs</a>
 
 <?php include_layout_template('admin_footer.php')?>
