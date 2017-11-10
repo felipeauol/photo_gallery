@@ -1,5 +1,1 @@
-2017-10-27 03:02:30 | Login: Someone Logged in
-2017-10-27 03:02:37 | Login: Someone Logged in
-2017-10-27 03:03:48 | Login: felipe_oliveira Logged in
-2017-10-27 03:05:17 | Login:  Logged in
-2017-10-27 03:07:46 | Login: felipe_oliveira Logged in
+2017-11-10 02:09:06 | Logs cleared: by User ID 

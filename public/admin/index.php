@@ -23,6 +23,4 @@ foreach($users as $user) {
 
 ?>
 
-<a href="index.php">Get Logs</a>
-
 <?php include_layout_template('admin_footer.php')?>
