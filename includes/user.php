@@ -48,4 +48,46 @@ class User extends DatabaseObject {
     {
         return $this->username . " " . $this->last_name;
     }
+
+    public function create() {
+        global $database;
+
+        $sql  = "INSERT INTO users (";
+        $sql .= "username, password, first_name, last_name";
+        $sql .= ") VALUES ('";
+        $sql .= $database->mysql_prep($this->username) ."', '";
+        $sql .= $database->mysql_prep($this->password) ."', '";
+        $sql .= $database->mysql_prep($this->first_name) ."', '";
+        $sql .= $database->mysql_prep($this->last_name) ."')";
+
+        if($database->db_query($sql)) {
+            $this->id = $database->insert_id();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function update() {
+        global $database;
+
+        $sql  = "UPDATE users SET ";
+        $sql .= "username='". $database->mysql_prep($this->username) ."', ";
+        $sql .= "password='". $database->mysql_prep($this->password) ."', ";
+        $sql .= "first_name='". $database->mysql_prep($this->first_name) ."', ";
+        $sql .= "last_name='". $database->mysql_prep($this->last_name) ."' ";
+        $sql .= "WHERE id=". $database->mysql_prep($this->id);
+        $database->db_query($sql);
+        return ($database->affected_rows() == 1) ? true : false;
+    }
+
+    public function delete() {
+        global $database;
+
+        $sql  = "DELETE FROM users ";
+        $sql .= "WHERE id =". $database->mysql_prep($this->id);
+        $sql .= " LIMIT 1";
+        $database->db_query($sql);
+        return ($database->affected_rows() == 1) ? true : false;
+    }
 }
